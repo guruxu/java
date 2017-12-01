@@ -52,7 +52,7 @@ public final class EntitySentiment extends EntityMention {
                            String entityId,
                            Double confidence,
                            Label sentiment) {
-        this(type, mention, normalized, count, null, entityId, confidence, sentiment);
+        this(type, mention, normalized, count, null, entityId, confidence, null, null, sentiment);
     }
 
     /**
@@ -64,6 +64,8 @@ public final class EntitySentiment extends EntityMention {
      * @param mentionOffsets mention offsets
      * @param entityId if the entity was linked, the ID from the knowledge base.
      * @param confidence entity confidence.
+     * @param salience entity salience.
+     * @param linkingConfidence entity linkingconfidence.
      * @param sentiment the sentiment information.
      */
     public EntitySentiment(String type,
@@ -73,8 +75,10 @@ public final class EntitySentiment extends EntityMention {
                            List<MentionOffsets> mentionOffsets,
                            String entityId,
                            Double confidence,
+                           Double salience,
+                           Double linkingConfidence,
                            Label sentiment) {
-        super(type, mention, normalized, count, mentionOffsets, entityId, confidence);
+        super(type, mention, normalized, count, mentionOffsets, entityId, confidence, salience, linkingConfidence);
         this.sentiment = sentiment;
     }
 }

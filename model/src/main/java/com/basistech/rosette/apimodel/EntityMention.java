@@ -74,6 +74,16 @@ public class EntityMention {
     private final Double confidence;
 
     /**
+     * @return the salience score for the entity (0.0/1.0)
+     */
+    private final Double salience;
+
+    /**
+     * @return the linking confidence score for the entity (0.0-1.0)
+     */
+    private final Double linkingConfidence;
+
+    /**
      * constructor for {@code EntityMention}
      * @param indocChainId in-document entity chain id
      * @param type entity type
@@ -81,6 +91,7 @@ public class EntityMention {
      * @param normalized normalized mention text
      * @param count mention count
      * @param entityId if the entity was linked, the ID from the knowledge base.
+     * @param confidence entity confidence
      */
     @Deprecated
     public EntityMention(
@@ -92,7 +103,16 @@ public class EntityMention {
             String entityId,
             Double confidence
     ) {
-        this(type, mention, normalized, count, null, entityId, confidence);
+        this.indocChainId = indocChainId;
+        this.type = type;
+        this.mention = mention;
+        this.normalized = normalized;
+        this.count = count;
+        this.mentionOffsets = null;
+        this.entityId = entityId;
+        this.confidence = confidence;
+        this.salience = null;
+        this.linkingConfidence = null;
     }
 
     /**
@@ -102,6 +122,7 @@ public class EntityMention {
      * @param normalized normalized mention text
      * @param entityId if the entity was linked, the ID from the knowledge base.
      * @param count mention count
+     * @param confidence entity confidence
      */
     @Deprecated
     public EntityMention(
@@ -112,7 +133,7 @@ public class EntityMention {
             Integer count,
             Double confidence
     ) {
-        this(type, mention, normalized, count, null, entityId, confidence);
+        this(type, mention, normalized, count, null, entityId, confidence, null, null);
     }
 
     /**
@@ -132,7 +153,9 @@ public class EntityMention {
             Integer count,
             List<MentionOffsets> mentionOffsets,
             String entityId,
-            Double confidence
+            Double confidence,
+            Double salience,
+            Double linkingConfidence
     ) {
         this.indocChainId = null;
         this.type = type;
@@ -142,5 +165,72 @@ public class EntityMention {
         this.count = count;
         this.mentionOffsets = mentionOffsets;
         this.confidence = confidence;
+        this.salience = salience;
+        this.linkingConfidence = linkingConfidence;
+    }
+
+    /**
+     * constructor for {@code EntityMention}
+     * @param type entity type
+     * @param mention mention text
+     * @param normalized normalized mention text
+     * @param entityId if the entity was linked, the ID from the knowledge base.
+     * @param count mention count
+     * @param confidence entity confidence
+     * @param salience entity salience
+     */
+    public EntityMention(
+            String type,
+            String mention,
+            String normalized,
+            String entityId,
+            Integer count,
+            Double confidence,
+            Double salience
+    ) {
+        this.indocChainId = null;
+        this.type = type;
+        this.mention = mention;
+        this.normalized = normalized;
+        this.entityId = entityId;
+        this.mentionOffsets = null;
+        this.count = count;
+        this.confidence = confidence;
+        this.salience = salience;
+        this.linkingConfidence = null;
+    }
+
+    /**
+     * constructor for {@code EntityMention}
+     * @param indocChainId in-document entity chain id
+     * @param type entity type
+     * @param mention mention text
+     * @param normalized normalized mention text
+     * @param count mention count
+     * @param entityId if the entity was linked, the ID from the knowledge base.
+     * @param confidence entity confidence
+     */
+    @Deprecated
+    public EntityMention(
+        Integer indocChainId,
+        String type,
+        String mention,
+        String normalized,
+        Integer count,
+        String entityId,
+        Double confidence,
+        Double salience,
+        Double linkingConfidence
+    ) {
+        this.indocChainId = indocChainId;
+        this.type = type;
+        this.mention = mention;
+        this.normalized = normalized;
+        this.count = count;
+        this.entityId = entityId;
+        this.mentionOffsets = null;
+        this.confidence = confidence;
+        this.salience = salience;
+        this.linkingConfidence = linkingConfidence;
     }
 }
